@@ -1,0 +1,20 @@
+.Reader {
+    text-align: center;
+  }
+  
+.Reader-header {
+    background-color: #282c34;
+    padding: 20px;
+    color: white;
+}
+
+#reader-window {
+    margin: 0 auto;
+    border:2px solid black;
+    width: 800px;
+}
+
+#changePage{
+    width: 10%;
+    background-color: blue;
+}
