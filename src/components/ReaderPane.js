@@ -8,10 +8,14 @@ import {
   Text,
   Alert,
 } from 'react-native';
+import LoadingBar from './LoadingBar';
 import { Markup } from 'interweave';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
+import { styled } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid2';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
@@ -39,6 +43,17 @@ const styles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
 });
+
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+  ...theme.applyStyles('dark', {
+    backgroundColor: '#1A2027',
+  }),
+}));
 
 const ReaderPane = ({ book_id }) => {
 
@@ -212,11 +227,28 @@ const ReaderPane = ({ book_id }) => {
     fetchChapter();
   };
 
-  return ( 
-  <SafeAreaView style={styles.container}>
+  if (!bookContent) {
+    return <LoadingBar></LoadingBar> // Display a loading message while fetching data
+  }else{
+    console.log("We got a bookcase with something");
+  }
+
+  /*{['left', 'right', 'top', 'bottom'].map((anchor) => (
+          <Fragment key={anchor}>
+            <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+            <Drawer
+              anchor={anchor}
+              open={state[anchor]}
+              onClose={toggleDrawer(anchor, false)}
+            >
+              {createList(anchor, tableOfContents)}
+            </Drawer>
+          </Fragment>
+        ))}
+    <SafeAreaView style={styles.container}>
     <View>
-      <div>
-        {['left', 'right', 'top', 'bottom'].map((anchor) => (
+      <div id = "tableOfContentsPopout">
+        {['left'].map((anchor) => (
           <Fragment key={anchor}>
             <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
             <Drawer
@@ -233,15 +265,12 @@ const ReaderPane = ({ book_id }) => {
       <h2> {bookTitle} </h2>
       </Text>
       <View style={styles.fixToText}>
+        <div id="reader-section">
         <Button id="changePage"
           title="Left button"
           onClick={GoBack}
         />
         <div id="reader-window">
-          <Button
-            title="Retrieve book"
-            onClick={GrabImage}
-          />
           <form onSubmit={JumpPage}>
             <input
               type="text"
@@ -257,9 +286,103 @@ const ReaderPane = ({ book_id }) => {
           title="Right button"
           onClick={GoFowardTest}
         />
+        </div>
       </View>
     </View>
   </SafeAreaView>
+
+  <SafeAreaView style={styles.container}>
+    <View>
+      <div id = "tableOfContentsPopout">
+        {['left'].map((anchor) => (
+          <Fragment key={anchor}>
+            <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+            <Drawer
+              anchor={anchor}
+              open={state[anchor]}
+              onClose={toggleDrawer(anchor, false)}
+            >
+              {createList(anchor, tableOfContents)}
+            </Drawer>
+          </Fragment>
+        ))}
+      </div>
+      <Text style={styles.title}>
+      <h2> {bookTitle} </h2>
+      </Text>
+        <div id="reader-section">
+        <form onSubmit={JumpPage}>
+            <input
+              type="text"
+              onChange={handleJumpPageInput} // Update state on change
+              placeholder="Enter page..."
+            />
+            <button type="submit">Submit</button>
+          </form>
+        <Button id="changePage"
+          title="Left button"
+          onClick={GoBack}
+        />
+        <div id="reader-window">
+      
+          <Markup content={bookContent} />
+          <Markup content={bookImage} />
+        </div>
+        <Button id="changePage"
+          title="Right button"
+          onClick={GoFowardTest}
+        />
+        </div>
+    </View>
+  </SafeAreaView>
+          */
+  return ( 
+    <div>
+      <SafeAreaView style={styles.container}>
+      <View>
+      <div id = "tableOfContentsPopout">
+        {['left'].map((anchor) => (
+          <Fragment key={anchor}>
+            <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+            <Drawer
+              anchor={anchor}
+              open={state[anchor]}
+              onClose={toggleDrawer(anchor, false)}
+            >
+              {createList(anchor, tableOfContents)}
+            </Drawer>
+          </Fragment>
+        ))}
+      </div>
+      <Text style={styles.title}>
+      <h2> {bookTitle} </h2>
+      </Text>
+        <div id="reader-section">
+        <form onSubmit={JumpPage}>
+            <input
+              type="text"
+              onChange={handleJumpPageInput} // Update state on change
+              placeholder="Enter page..."
+            />
+            <button type="submit">Submit</button>
+          </form>
+        <Button id="changePage"
+          title="Left button"
+          onClick={GoBack}
+        />
+        <div id="reader-window">
+      
+          <Markup content={bookContent} />
+          <Markup content={bookImage} />
+        </div>
+        <Button id="changePage"
+          title="Right button"
+          onClick={GoFowardTest}
+        />
+        </div>
+    </View>
+  </SafeAreaView>
+    </div>
   )
 }
 
