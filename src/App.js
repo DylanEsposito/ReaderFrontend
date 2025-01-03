@@ -1,7 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import Home from './routes/Home';
 import Library from './routes/Library';
 import Reader from './routes/Reader';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import './App.css'; // Add some basic styling here
 
 function App() {
@@ -39,19 +42,13 @@ function App() {
   return (
     <div className="App">
       <Router>
-      <div>
-        <nav>
-          <ul>
-            <li><Link to="/">Library</Link></li>
-            <li><Link to="/reader">Reader</Link></li>
-          </ul>
-        </nav>
+        <Navbar></Navbar>
         <Routes>
-          <Route path="/" element={<Library />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/Library" element={<Library />} />
           <Route path="/reader/" element={<Reader />} />
           <Route path="/reader/:id" element={<Reader />} />
         </Routes>
-      </div>
       </Router>
     </div>
   )

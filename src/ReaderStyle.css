@@ -6,15 +6,32 @@
     background-color: #282c34;
     padding: 20px;
     color: white;
+    text-align: center;
 }
+
 
 #reader-window {
     margin: 0 auto;
-    border:2px solid black;
-    width: 800px;
+    border: 2px solid black;
+    width: 500px;
+    height: 600px;
+    font-size: 15px;
 }
 
+#reader-window {
+    margin: 5px auto;
+    padding: 15px;
+}
+
+#reader-window p{
+    text-align: left;
+}
 #changePage{
     width: 10%;
     background-color: blue;
+}
+
+#tableOfContentsPopout{
+    background-color: yellow;
+    float: right;
 }

@@ -49,9 +49,7 @@ function Reader() {
   */
 
   return (
-    <div>
-      <ReaderPane book_id={id}/>
-    </div>
+    <ReaderPane book_id={id}/>
   );
 };
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import BookPreview from './BookPreview';
 import axios from 'axios';
+import LoadingBar from './LoadingBar';
 
 const BookList = () => {
 
@@ -33,13 +34,9 @@ const BookList = () => {
   }, []);
   
   if (!bookCase) {
-    return <div>Loading...</div> // Display a loading message while fetching data
+    return <LoadingBar></LoadingBar> // Display a loading message while fetching data
   }else{
     console.log("We got a bookcase with something");
-
-    /*bookCaseOld.map(bookObj => {
-      console.log(bookObj);
-    });*/
   }
 
   return (
